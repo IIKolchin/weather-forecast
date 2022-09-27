@@ -1,0 +1,87 @@
+.section {
+  margin-top: 60px;
+  margin-left: 60px;
+  background: #ffffff;
+  width: 460px;
+  height: 600px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.img {
+  margin-top: 28px;
+  margin-left: 39px;
+  width: 197px;
+  height: 197px;
+}
+
+.temp {
+  margin: 0 auto;
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 96px;
+  line-height: 100px;
+  text-align: center;
+}
+
+.city {
+  margin: 0 auto;
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+
+  text-align: center;
+}
+
+.date {
+  margin: 0 17% 0;
+  padding-bottom: 8px;
+  margin-top: 35px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #acdafc;
+}
+
+.day {
+  margin: 0;
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+}
+
+.time {
+  margin: 0;
+  color: #8b8d92;
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+}
+
+.other {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.text {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.text:first-child {
+  margin-right: 48px;
+}
+
+.degree {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  color: #8b8d92;
+}
