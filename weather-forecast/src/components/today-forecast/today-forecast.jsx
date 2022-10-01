@@ -4,10 +4,6 @@ import sun from '../../images/image_32.png';
 export default function TodayForecast() {
   return (
     <section className={styles.section}>
-      {/* <form name='weather'>
-        <input type='text' name='weather' />
-        <button class='button'>Найти</button>
-      </form> */}
       <img className={styles.img} src={sun} alt='' />
       <h2 className={styles.temp}>39°C</h2>
       <p className={styles.city}>Mariupol, UA</p>
