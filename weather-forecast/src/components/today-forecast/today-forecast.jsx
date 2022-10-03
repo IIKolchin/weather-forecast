@@ -1,19 +1,52 @@
 import styles from './today-forecast.module.css';
-import sun from '../../images/image_32.png';
+import sun from '../../images/big_sun.png';
+import rain from '../../images/rain.png';
+import wind from '../../images/wind.png';
+import clouds_big from '../../images/clouds_big.png';
+import { format } from 'date-fns';
 
-export default function TodayForecast() {
+export default function TodayForecast({ data }) {
+
+
+  const day = format(new Date(), 'eeee');
+  const time = format(new Date(), 'HH:mm');
+
+  const temp = Math.floor(data?.main.temp - 273) + '°C';
+  const feel = Math.floor(data?.main.feels_like - 273) + '°C';
+
   return (
     <section className={styles.section}>
-      <img className={styles.img} src={sun} alt='' />
-      <h2 className={styles.temp}>39°C</h2>
-      <p className={styles.city}>Mariupol, UA</p>
+      {data && (
+        <img
+          className={styles.img}
+          src={
+            data?.weather[0].main === 'Clouds'
+              ? clouds_big
+              : data.weather[0].main === 'Clear'
+              ? sun
+              : data.weather[0].main === 'Rain'
+              ? rain
+              : wind
+          }
+          alt=''
+        />
+      )}
+      <h2 className={styles.temp}>{temp}</h2>
+      <p className={styles.city}>
+        {data?.name}, {data?.sys.country}
+      </p>
       <div className={styles.date}>
-        <p className={styles.day}>Wednesday,</p>
-        <p className={styles.time}>1:00 p.m.</p>
+        <p className={styles.day}>{day},</p>
+        <p className={styles.time}>{time}</p>
       </div>
       <div className={styles.other}>
-        <p className={styles.text}>Feels like <span className={styles.degree}>42°C</span></p>
-        <p className={styles.text}>Yesterday <span className={styles.degree}>40°C</span></p>
+        <p className={styles.text}>
+          Feels like <span className={styles.degree}>{feel}</span>
+        </p>
+        <p className={styles.text}>
+          Pressure{' '}
+          <span className={styles.degree}>{data?.main.pressure} hPa</span>
+        </p>
       </div>
     </section>
   );
