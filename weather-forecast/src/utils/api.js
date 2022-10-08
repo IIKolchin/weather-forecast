@@ -1,21 +1,38 @@
-const axios = require('axios');
+import { WEATHER_URL, X_RAPID_API_HOST, X_RAPID_API_KEY } from './constants';
 
-export const getWeatherRequest = async (lat, lon) => {
-  try {
-    const res = await axios.request({
-      method: 'GET',
-      url: 'https://weatherbit-v1-mashape.p.rapidapi.com/forecast/3hourly',
-      params: { lat: lat, lon: lon },
+//const axios = require('axios');
+
+// export const getWeatherRequest = async (lat, lon) => {
+//   try {
+//     const res = await axios.request({
+//       method: 'GET',
+//       url: 'https://weatherbit-v1-mashape.p.rapidapi.com/forecast/3hourly',
+//       params: { lat: lat, lon: lon },
+//       headers: {
+//         'X-RapidAPI-Key': '415ef0867cmsha1e7cbc993d38eap1a4c8ajsn5da9e3d5a86a',
+//         'X-RapidAPI-Host': 'weatherbit-v1-mashape.p.rapidapi.com',
+//       },
+//     });
+//     return res;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+export const getWeatherWeekRequest = async (lat, lon) => {
+
+    const res = await fetch(WEATHER_URL + new URLSearchParams({
+       'lat': lat, 
+       'lon': lon,
+      }), {
       headers: {
-        'X-RapidAPI-Key': '415ef0867cmsha1e7cbc993d38eap1a4c8ajsn5da9e3d5a86a',
-        'X-RapidAPI-Host': 'weatherbit-v1-mashape.p.rapidapi.com',
-      },
-    });
-    return res;
-  } catch (error) {
-    console.error(error);
-  }
+        'X-RapidAPI-Key': X_RAPID_API_KEY,
+        'X-RapidAPI-Host': X_RAPID_API_HOST,
+      }});
+    return checkResponse(res);
+
 };
+
 
 function checkResponse(res) {
   if (res.ok) {
@@ -32,10 +49,11 @@ export const getCoord = async (city) => {
   return checkResponse(res);
 };
 
-export const getWeatherRequestNow = async (lat, lon) => {
+export const getWeatherTodayRequest = async (lat, lon) => {
   const res = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=f944b0150cc655ed9449452d91d6e60c`,
     {}
   );
   return checkResponse(res);
 };
+

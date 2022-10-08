@@ -1,42 +1,45 @@
 import styles from './app.module.css';
 import TodayForecast from '../today-forecast/today-forecast';
 import WeatherComponents from '../weather-components/weather-components';
+// import { useSelector, useDispatch } from "../../services/types/index";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react';
-import {
-  getCoord,
-  getWeatherRequest,
-  getWeatherRequestNow,
-} from '../../utils/api';
 import { useState } from 'react';
+import { getWeatherWeek } from '../../services/actions/weather-week';
+import { getWeatherToday } from '../../services/actions/weather-today';
+
 
 function App() {
+
+  const dataWeek = useSelector((store) => store.dataWeek.data);
+  const dataToday = useSelector((store) => store.dataToday.data);
+  const dispatch = useDispatch();
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
-  const [dataWeek, setDataWeek] = useState();
-  const [dataNow, setDataNow] = useState();
+  // const [dataWeek, setDataWeek] = useState();
+  // const [dataNow, setDataNow] = useState();
+
+console.log(dataToday)
+console.log(dataWeek)
+
 
   useEffect(() => {
+    
     getPosition();
-  }, [setDataWeek, setLatitude, setLongitude]);
+  }, [setLatitude, setLongitude]);
 
   const getPosition = async () => {
     navigator.geolocation.getCurrentPosition(function (position) {
-      getWeatherRequest(
+      dispatch(getWeatherWeek(
         position.coords.latitude,
         position.coords.longitude
-      ).then((data) => {
-        console.log(data);
-        setDataWeek(data.data);
-      });
-      getWeatherRequestNow(
+      ))
+      dispatch(getWeatherToday(
         position.coords.latitude,
         position.coords.longitude
-      ).then((data) => {
-        console.log(data);
-        setDataNow(data);
+      ))
 
-
-      });
+     
 
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
@@ -47,11 +50,11 @@ function App() {
 
   return (
     <section className={styles.app}>
-      <TodayForecast data={dataNow} />
+      <TodayForecast data={dataToday} />
       <WeatherComponents
         latitude={latitude}
         longitude={longitude}
-        dataNow={dataNow}
+        dataToday={dataToday}
         dataWeek={dataWeek}
       />
     </section>

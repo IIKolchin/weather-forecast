@@ -1,6 +1,6 @@
 import styles from './weather-components.module.css';
 import { getCoord, getWeatherRequest } from '../../utils/api';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import fromUnixTime from 'date-fns/fromUnixTime';
 import { format, addMinutes, parseISO } from 'date-fns';
 import cloud from '../../images/cloud_small.png';
@@ -14,30 +14,57 @@ import cloud_small from '../../images/cloud.svg';
 export default function WeatherComponents({
   latitude,
   longitude,
-  dataNow,
+  dataToday,
   dataWeek,
 }) {
-  const sunrise = fromUnixTime(dataNow?.sys.sunrise).toString().slice(16, 21);
-  const sunset = fromUnixTime(dataNow?.sys.sunset).toString().slice(16, 21);
+  const [value, setValue] = useState(null);
+  const [showButton, setShowButton] = useState(false);
+
+  const onChange = (e) => {
+    setValue(e.target.value)
+    setShowButton(true);
+  };
+
+  const getCityWeather = (e) => {
+    e.preventDefault();
+   getCoord(value).then((data) => {
+
+      // console.log(data)
+    })
+  }
+
+// console.log(dataWeek)
+//   console.log(getCityWeather)
+
+
+
+
+
+  const sunrise = fromUnixTime(dataToday?.sys.sunrise).toString().slice(16, 21);
+  const sunset = fromUnixTime(dataToday?.sys.sunset).toString().slice(16, 21);
 
   useEffect(() => {});
-  // "2022-10-03T03:00:00"
-  const day = dataWeek?.timestamp_utc;
-  const image = console.log(day);
 
   const map = `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d576587.6582438038!2d${longitude}!3d${latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sru!4v1652100284601!5m2!1sru!2sru`;
 
   return (
     <section className={styles.section}>
       <form className={styles.form}>
-        <input className={styles.input} type='text' name='weather' />
-        {/* <button className={styles.button}>Найти</button> */}
+        <input
+          className={styles.input}
+          onChange={onChange}
+          value={value}
+          type={'text'}
+          name={'weather'}
+          placeholder={'your city ...'}
+        />
+        {showButton && <button className={styles.button} onClick={getCityWeather}>Найти</button>}
       </form>
       <div className={styles.week}>
         {dataWeek &&
-          dataWeek.data.map((dataWeek) => {
+          dataWeek.map((dataWeek, i) => {
             return (
-              <div className={styles.item}>
+              <div className={styles.item} key={i}>
                 <p className={styles.day}>
                   {format(parseISO(dataWeek.timestamp_utc), 'eee HH:mm')}
                 </p>
@@ -62,17 +89,17 @@ export default function WeatherComponents({
       <div className={styles.details}>
         <div className={styles.info}>
           <img className={styles.img} src={cloud} alt='' />
-          <p className={styles.text}>Clouds {dataNow?.clouds.all} %</p>
+          <p className={styles.text}>Clouds {dataToday?.clouds.all} %</p>
         </div>
         <div className={styles.info}>
           <img className={styles.img} src={wind} alt='' />
           <p className={styles.text}>
-            Wind speed {Math.floor(dataNow?.wind.speed)} m/s
+            Wind speed {Math.floor(dataToday?.wind.speed)} m/s
           </p>
         </div>
         <div className={styles.info}>
           <img className={styles.img} src={humidity} alt='' />
-          <p className={styles.text}>Humidity {dataNow?.main.humidity} %</p>
+          <p className={styles.text}>Humidity {dataToday?.main.humidity} %</p>
         </div>
         <div className={styles.info}>
           <img className={styles.img} src={sun} alt='' />
