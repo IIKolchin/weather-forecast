@@ -3,11 +3,12 @@ import sun from '../../images/big_sun.png';
 import rain from '../../images/rain.png';
 import wind from '../../images/wind.png';
 import clouds_big from '../../images/clouds_big.png';
+import broken_clouds from '../../images/broken_clouds.png'
 import { format } from 'date-fns';
 
-export default function TodayForecast({ data }) {
+export default function TodayForecast( {data} ) {
 
-
+console.log(data)
   const day = format(new Date(), 'eeee');
   const time = format(new Date(), 'HH:mm');
 
@@ -20,12 +21,14 @@ export default function TodayForecast({ data }) {
         <img
           className={styles.img}
           src={
-            data?.weather[0].main === 'Clouds'
-              ? clouds_big
+            data?.weather[0].icon === '04d'
+              ? broken_clouds
               : data.weather[0].main === 'Clear'
               ? sun
               : data.weather[0].main === 'Rain'
               ? rain
+              : data.weather[0].main === 'clouds'
+              ? clouds_big
               : wind
           }
           alt=''
