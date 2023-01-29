@@ -10,15 +10,21 @@ import sun from '../../images/sun.png';
 import sun_small from '../../images/sun.svg';
 import rain_small from '../../images/rain.svg';
 import cloud_small from '../../images/cloud.svg';
+import { getWeatherWeek } from '../../services/actions/weather-week';
+import { getWeatherToday } from '../../services/actions/weather-today';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function WeatherComponents({
   latitude,
   longitude,
   dataToday,
   dataWeek,
+  latitudeHandler,
+  longitudeHandler,
 }) {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState('');
   const [showButton, setShowButton] = useState(false);
+  const dispatch = useDispatch();
 
   const onChange = (e) => {
     setValue(e.target.value)
@@ -28,16 +34,20 @@ export default function WeatherComponents({
   const getCityWeather = (e) => {
     e.preventDefault();
    getCoord(value).then((data) => {
-
-      // console.log(data)
+    
+    dispatch(
+      getWeatherToday(data[0].lat, data[0].lon)
+    );
+    dispatch(
+      getWeatherWeek(data[0].lat, data[0].lon)
+    );
+      console.log(data[0].lat, data[0].lon)
+      latitudeHandler(data[0].lat);
+      longitudeHandler(data[0].lon);
     })
+    setShowButton(false);
+    setValue('')
   }
-
-// console.log(dataWeek)
-//   console.log(getCityWeather)
-
-
-
 
 
   const sunrise = fromUnixTime(dataToday?.sys.sunrise).toString().slice(16, 21);
@@ -58,7 +68,7 @@ export default function WeatherComponents({
           name={'weather'}
           placeholder={'your city ...'}
         />
-        {showButton && <button className={styles.button} onClick={getCityWeather}>Найти</button>}
+        {showButton && <button className={styles.button} onClick={getCityWeather}>Find</button>}
       </form>
       <div className={styles.week}>
         {dataWeek &&

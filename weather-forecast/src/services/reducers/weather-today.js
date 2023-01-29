@@ -5,7 +5,7 @@ import {
   } from '../actions/weather-today';
   
   const initialState = {
-    data: [],
+    data: null,
     dataRequest: false,
     dataFailed: false,
   };
