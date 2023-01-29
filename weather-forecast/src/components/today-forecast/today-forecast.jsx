@@ -3,12 +3,11 @@ import sun from '../../images/big_sun.png';
 import rain from '../../images/rain.png';
 import wind from '../../images/wind.png';
 import clouds_big from '../../images/clouds_big.png';
-import broken_clouds from '../../images/broken_clouds.png'
+import broken_clouds from '../../images/broken_clouds.png';
+import clouds from '../../images/clouds.png';
 import { format } from 'date-fns';
 
 export default function TodayForecast( {data} ) {
-
-console.log(data)
   const day = format(new Date(), 'eeee');
   const time = format(new Date(), 'HH:mm');
 
@@ -17,7 +16,7 @@ console.log(data)
 
   return (
     <section className={styles.section}>
-      {data && (
+    
         <img
           className={styles.img}
           src={
@@ -27,13 +26,15 @@ console.log(data)
               ? sun
               : data.weather[0].main === 'Rain'
               ? rain
-              : data.weather[0].main === 'clouds'
+              : data.weather[0].icon === '04n'
+              ? clouds
+              : data.weather[0].icon === '02n'
               ? clouds_big
               : wind
           }
           alt=''
         />
-      )}
+
       <h2 className={styles.temp}>{temp}</h2>
       <p className={styles.city}>
         {data?.name}, {data?.sys.country}

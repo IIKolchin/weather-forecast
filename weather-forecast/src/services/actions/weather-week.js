@@ -11,9 +11,7 @@ export function getWeatherWeek(lat, lon) {
       });
       try {
         const data = await getWeatherWeekRequest(lat, lon)
-        console.log(data)
         if (data) {
-          console.log(data)
           dispatch({
             type: GET_WEATHER_WEEK_SUCCESS,
             data: data.data,
