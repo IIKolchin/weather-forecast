@@ -88,7 +88,6 @@
 
 .img {
   margin: 18px 36px 0;
-
   width: 70px;
   height: 70px;
 }
@@ -118,4 +117,41 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
   text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .week {
+    width: 500px;
+  }
+
+  .details {
+    width: 500px;
+    margin-top: 5px;
+overflow: auto;
+padding: 10px 5px;
+  }
+
+  .info {
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .week {
+      width: 100%;
+  }
+
+  .details {
+    max-width: 70%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .info {
+    width: 170px;
+    height: 170px;
+
+
+  }
 }

@@ -1,6 +1,6 @@
 import styles from './weather-components.module.css';
 import { getCoord, getWeatherRequest } from '../../utils/api';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import fromUnixTime from 'date-fns/fromUnixTime';
 import { format, addMinutes, parseISO } from 'date-fns';
 import cloud from '../../images/cloud_small.png';
@@ -12,7 +12,7 @@ import rain_small from '../../images/rain.svg';
 import cloud_small from '../../images/cloud.svg';
 import { getWeatherWeek } from '../../services/actions/weather-week';
 import { getWeatherToday } from '../../services/actions/weather-today';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export default function WeatherComponents({
   latitude,
@@ -27,34 +27,41 @@ export default function WeatherComponents({
   const dispatch = useDispatch();
 
   const onChange = (e) => {
-    setValue(e.target.value)
+    setValue(e.target.value);
     setShowButton(true);
   };
 
   const getCityWeather = (e) => {
     e.preventDefault();
-   getCoord(value).then((data) => {
-    
-    dispatch(
-      getWeatherToday(data[0].lat, data[0].lon)
-    );
-    dispatch(
-      getWeatherWeek(data[0].lat, data[0].lon)
-    );
-      console.log(data[0].lat, data[0].lon)
+    getCoord(value).then((data) => {
+      dispatch(getWeatherToday(data[0].lat, data[0].lon));
+      dispatch(getWeatherWeek(data[0].lat, data[0].lon));
       latitudeHandler(data[0].lat);
       longitudeHandler(data[0].lon);
-    })
+    });
     setShowButton(false);
-    setValue('')
-  }
+    setValue('');
+  };
 
+  const getWidthMap = useCallback(() => {
+    if (window.innerWidth >= 768 && window.innerWidth <= 1025) {
+      return 500
+    } else if (window.innerWidth >= 1025) {
+      return 660
+    } else {
+      return 400
+    }
+  }, [])
+
+
+  useEffect(() => {
+    window.onresize = () => {
+      getWidthMap()
+    };
+  }, [getWidthMap]);
 
   const sunrise = fromUnixTime(dataToday?.sys.sunrise).toString().slice(16, 21);
   const sunset = fromUnixTime(dataToday?.sys.sunset).toString().slice(16, 21);
-
-  useEffect(() => {});
-
   const map = `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d576587.6582438038!2d${longitude}!3d${latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sru!4v1652100284601!5m2!1sru!2sru`;
 
   return (
@@ -68,7 +75,11 @@ export default function WeatherComponents({
           name={'weather'}
           placeholder={'your city ...'}
         />
-        {showButton && <button className={styles.button} onClick={getCityWeather}>Find</button>}
+        {showButton && (
+          <button className={styles.button} onClick={getCityWeather}>
+            Find
+          </button>
+        )}
       </form>
       <div className={styles.week}>
         {dataWeek &&
@@ -122,7 +133,7 @@ export default function WeatherComponents({
         src={map}
         className={styles.iframe}
         title='This is a unique title'
-        width={660}
+        width={getWidthMap()}
         height={204}
         style={{ border: 0 }}
         allowFullScreen=''

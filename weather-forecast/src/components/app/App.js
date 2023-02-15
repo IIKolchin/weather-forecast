@@ -1,7 +1,6 @@
 import styles from './app.module.css';
 import TodayForecast from '../today-forecast/today-forecast';
 import WeatherComponents from '../weather-components/weather-components';
-// import { useSelector, useDispatch } from "../../services/types/index";
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -15,9 +14,6 @@ function App() {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
 
-  console.log(dataToday);
-  // console.log(dataWeek);
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       dispatch(
@@ -30,24 +26,7 @@ function App() {
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
     });
-    // getForecast();
   }, [dispatch]);
-
-  // const getForecast = async () => {
-  //  navigator.geolocation.getCurrentPosition(function (position) {
-  //     dispatch(getWeatherWeek(
-  //       position.coords.latitude,
-  //       position.coords.longitude
-  //     ));
-  //     dispatch(getWeatherToday(
-  //       position.coords.latitude,
-  //       position.coords.longitude
-  //     ));
-
-  //     setLatitude(position.coords.latitude);
-  //     setLongitude(position.coords.longitude);
-  //   });
-  // };
 
   return (
     <>
@@ -63,7 +42,7 @@ function App() {
             longitudeHandler={setLongitude}
           />
         </section>
-     )} 
+      )}
     </>
   );
 }
