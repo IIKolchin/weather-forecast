@@ -158,6 +158,7 @@
   }
 
   .details {
+    padding: 0;
     max-width: 70%;
     margin: 0 auto;
     flex-wrap: wrap;
@@ -177,8 +178,8 @@
     margin-top: 30px;
   }
 
-  .input {
-    margin: 0 auto;
+  .form {
+    justify-content: center;
   }
 
   .map {
@@ -189,6 +190,7 @@
 
 @media (max-width: 500px) {
 
+
   .info {
     width: 140px;
     height: 140px;
@@ -198,14 +200,24 @@
   .map {
     padding-left: 0;
     padding-right: 0;
-    width: 80%; 
+    width: calc(100% - 40px); 
   }
 
   .week {
-    width: 90%;
+    width: calc(100% - 20px);
+    margin-right: 10px;
+    margin-left: 10px;
+    
   }
 
   .details {
-    max-width: 100%;
+    max-width: calc(100% - 20px);
+    padding: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  .input {
+    width: 250px;
   }
 }

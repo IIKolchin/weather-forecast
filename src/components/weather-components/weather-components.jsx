@@ -45,21 +45,12 @@ export default function WeatherComponents({
 
   const getWidthMap = useCallback(() => {
     if (window.innerWidth < 500) {
-      return window.innerWidth - 80;
+      return window.innerWidth - 40;
     } else if (window.innerWidth < 1025) {
       return 500;
     } else {
       return 660;
     }
-
-
-    // if (window.innerWidth > 768 && window.innerWidth < 1025) {
-    //   return 500;
-    // } else if (window.innerWidth > 1025) {
-    //   return 660;
-    // } else {
-    //   return window.innerWidth;
-    // }
   }, []);
 
   console.log(window.innerWidth)
