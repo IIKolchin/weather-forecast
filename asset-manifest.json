@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.7232621c.css",
-    "main.js": "/static/js/main.b5dac587.js",
-    "static/js/787.2a38e5c6.chunk.js": "/static/js/787.2a38e5c6.chunk.js",
-    "static/media/rain.svg": "/static/media/rain.2847d80fd5275ccc96a3acedb908df07.svg",
-    "static/media/sun.svg": "/static/media/sun.2f94f297b6b11274e8a96f9fb486ecdf.svg",
-    "static/media/cloud.svg": "/static/media/cloud.699e12e5238de0c03427847173c7e05b.svg",
-    "static/media/broken_clouds.png": "/static/media/broken_clouds.2a728dafcf5bc88ff428.png",
-    "static/media/rain.png": "/static/media/rain.fda61b7ca00869588000.png",
-    "static/media/wind.png": "/static/media/wind.0edae982edc0a0bea6bc.png",
-    "index.html": "/index.html",
-    "main.7232621c.css.map": "/static/css/main.7232621c.css.map",
-    "main.b5dac587.js.map": "/static/js/main.b5dac587.js.map",
-    "787.2a38e5c6.chunk.js.map": "/static/js/787.2a38e5c6.chunk.js.map"
+    "main.css": "/Weather-forecast/static/css/main.7232621c.css",
+    "main.js": "/Weather-forecast/static/js/main.1e027e7c.js",
+    "static/js/787.2a38e5c6.chunk.js": "/Weather-forecast/static/js/787.2a38e5c6.chunk.js",
+    "static/media/rain.svg": "/Weather-forecast/static/media/rain.2847d80fd5275ccc96a3acedb908df07.svg",
+    "static/media/sun.svg": "/Weather-forecast/static/media/sun.2f94f297b6b11274e8a96f9fb486ecdf.svg",
+    "static/media/cloud.svg": "/Weather-forecast/static/media/cloud.699e12e5238de0c03427847173c7e05b.svg",
+    "static/media/broken_clouds.png": "/Weather-forecast/static/media/broken_clouds.2a728dafcf5bc88ff428.png",
+    "static/media/rain.png": "/Weather-forecast/static/media/rain.fda61b7ca00869588000.png",
+    "static/media/wind.png": "/Weather-forecast/static/media/wind.0edae982edc0a0bea6bc.png",
+    "index.html": "/Weather-forecast/index.html",
+    "main.7232621c.css.map": "/Weather-forecast/static/css/main.7232621c.css.map",
+    "main.1e027e7c.js.map": "/Weather-forecast/static/js/main.1e027e7c.js.map",
+    "787.2a38e5c6.chunk.js.map": "/Weather-forecast/static/js/787.2a38e5c6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7232621c.css",
-    "static/js/main.b5dac587.js"
+    "static/js/main.1e027e7c.js"
   ]
 }
