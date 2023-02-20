@@ -44,19 +44,29 @@ export default function WeatherComponents({
   };
 
   const getWidthMap = useCallback(() => {
-    if (window.innerWidth >= 768 && window.innerWidth <= 1025) {
-      return 500
-    } else if (window.innerWidth >= 1025) {
-      return 660
+    if (window.innerWidth < 500) {
+      return window.innerWidth - 80;
+    } else if (window.innerWidth < 1025) {
+      return 500;
     } else {
-      return 400
+      return 660;
     }
-  }, [])
 
+
+    // if (window.innerWidth > 768 && window.innerWidth < 1025) {
+    //   return 500;
+    // } else if (window.innerWidth > 1025) {
+    //   return 660;
+    // } else {
+    //   return window.innerWidth;
+    // }
+  }, []);
+
+  console.log(window.innerWidth)
 
   useEffect(() => {
     window.onresize = () => {
-      getWidthMap()
+      getWidthMap();
     };
   }, [getWidthMap]);
 
@@ -129,17 +139,19 @@ export default function WeatherComponents({
           </p>
         </div>
       </div>
-      <iframe
-        src={map}
-        className={styles.iframe}
-        title='This is a unique title'
-        width={getWidthMap()}
-        height={204}
-        style={{ border: 0 }}
-        allowFullScreen=''
-        loading='lazy'
-        referrerPolicy='no-referrer-when-downgrade'
-      ></iframe>
+      <div className={styles.map}>
+        <iframe
+          src={map}
+          className={styles.iframe}
+          title='This is a unique title'
+          width={getWidthMap()}
+          height={204}
+          style={{ border: 0 }}
+          allowFullScreen=''
+          loading='lazy'
+          referrerPolicy='no-referrer-when-downgrade'
+        ></iframe>
+      </div>
     </section>
   );
 }

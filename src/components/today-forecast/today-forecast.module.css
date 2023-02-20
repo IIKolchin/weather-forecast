@@ -88,8 +88,8 @@
 
 @media (max-width: 1025px) {
   .other {
-      flex-direction: column;
-      align-items: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .text:first-child {
@@ -99,6 +99,12 @@
 
 @media (max-width: 768px) {
   .section {
-      margin: 0 auto;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .section {
+    width: 90%;
   }
 }
