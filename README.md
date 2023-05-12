@@ -1,4 +1,5 @@
 # Weather Forecast App
+![alt text](https://i.ibb.co/YN38ZxS/2023-05-12-17-12-32.png)
 
 ## Overview
 A weather forecast application that allows you to view the forecast, both in the place where you are and in the selected city.
